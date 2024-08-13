@@ -1,0 +1,4 @@
+.idea/*
+build/*
+dist/*
+vital_agent_kg_utils.egg-info/*
