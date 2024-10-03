@@ -13,9 +13,12 @@ setup(
     license='Apache License 2.0',
     install_requires=[
             'vital-ai-vitalsigns>=0.1.21',
+            'vital-agent-container-sdk>=0.1.3',
             'vital-ai-haley-kg>=0.1.14',
+            'kgraphservice>=0.0.7',
             'six',
-            'pyyaml'
+            'pyyaml',
+            'requests'
         ],
     classifiers=[
         "Programming Language :: Python :: 3.10",
