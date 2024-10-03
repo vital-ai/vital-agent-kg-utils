@@ -17,6 +17,7 @@ from vital_agent_kg_utils.vital_agent_rest_resource_client.tools.tool_response i
 from vital_agent_kg_utils.vital_agent_rest_resource_client.tools.tool_results import ToolResults
 from vital_agent_kg_utils.vital_agent_rest_resource_client.tools.weather.weather_response import WeatherResponse, \
     WeatherPrediction, WeatherData
+from vital_agent_kg_utils.vital_agent_rest_resource_client.tools.weather.weather_tool_handler import WeatherToolHandler
 
 
 # client to the python webservice which provides access to tools
@@ -57,7 +58,10 @@ class VitalAgentRestResourceClient(KGraphServiceInterface, ToolServiceInterface)
 
     # Tools
 
-    def handle_tool_request(self, tool_name: str, tool_parameters: ToolParameters) -> ToolResults:
+    def handle_tool_request(self, tool_name: str, tool_parameters: ToolParameters) -> ToolResponse:
+
+        # TODO
+        # check tool_name to determine validation and handler
 
         tool_request = ToolRequest(
             tool=tool_name,
@@ -79,13 +83,27 @@ class VitalAgentRestResourceClient(KGraphServiceInterface, ToolServiceInterface)
 
         response_json = response.json()
 
-        weather_data = parse_weather_response(response_json)
+        if tool_name == "weather_tool":
+            # use handler for parsing response
+            handler = WeatherToolHandler()
+            weather_results = handler.handle_response(response_json)
+            tool_response = ToolResponse(
+                tool_name=tool_name,
+                tool_parameters=tool_parameters,
+                tool_results=weather_results
+            )
+            return tool_response
 
-        weather_response = WeatherResponse(
-            weather_data=weather_data
+        # unknown tool
+        tool_results = ToolResults()
+
+        tool_response = ToolResponse(
+            tool_name=tool_name,
+            tool_parameters=tool_parameters,
+            tool_results=tool_results
         )
 
-        return weather_response
+        return tool_response
 
     # KGService calls
 

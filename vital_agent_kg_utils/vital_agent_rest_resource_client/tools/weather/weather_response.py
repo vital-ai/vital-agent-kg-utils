@@ -1,7 +1,5 @@
 from typing import List
-
 from typing_extensions import TypedDict
-
 from vital_agent_kg_utils.vital_agent_rest_resource_client.tools.tool_results import ToolResults
 
 

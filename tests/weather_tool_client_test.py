@@ -17,7 +17,9 @@ def main():
         longitude=-74.0060
     )
 
-    weather_results = client.handle_tool_request("weather_tool", weather_request)
+    tool_response = client.handle_tool_request("weather_tool", weather_request)
+
+    weather_results = tool_response.tool_results
 
     print(json.dumps(weather_results, indent=4))
 
