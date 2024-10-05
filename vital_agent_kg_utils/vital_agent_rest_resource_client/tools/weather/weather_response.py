@@ -1,5 +1,7 @@
 from typing import List
 from typing_extensions import TypedDict
+
+from vital_agent_kg_utils.vital_agent_rest_resource_client.tools.tool_data import ToolData
 from vital_agent_kg_utils.vital_agent_rest_resource_client.tools.tool_results import ToolResults
 
 
@@ -27,7 +29,7 @@ class WeatherPrediction(TypedDict):
     sunset: str
 
 
-class WeatherData(TypedDict):
+class WeatherData(ToolData):
     """
     Represents the weather data including current conditions and daily predictions.
 
