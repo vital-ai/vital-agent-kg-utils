@@ -14,7 +14,10 @@ def main():
 
     weather_request = WeatherRequest(
         latitude=40.7128,
-        longitude=-74.0060
+        longitude=-74.0060,
+        include_previous=False,
+        use_archive=False,
+        archive_date=""
     )
 
     tool_response = client.handle_tool_request("weather_tool", weather_request)
