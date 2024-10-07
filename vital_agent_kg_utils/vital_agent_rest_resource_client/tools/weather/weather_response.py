@@ -54,6 +54,7 @@ class WeatherData(ToolData):
     Represents the weather data including current conditions and daily predictions.
 
     Attributes:
+        place_label (str): The place label of the weather prediction.
         latitude (float): The latitude of the location.
         longitude (float): The longitude of the location.
         timezone (str): The timezone of the location.
@@ -74,6 +75,7 @@ class WeatherData(ToolData):
 
         daily_predictions (List[WeatherPrediction]): A list of daily weather predictions.
     """
+    place_label: str
     latitude: float
     longitude: float
     timezone: str

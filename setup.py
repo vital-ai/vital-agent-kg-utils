@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='vital-agent-kg-utils',
-    version='0.1.2',
+    version='0.1.4',
     author='Marc Hadfield',
     author_email='marc@vital.ai',
     description='Vital Agent KG Utils',

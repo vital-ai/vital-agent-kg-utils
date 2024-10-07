@@ -46,6 +46,7 @@ class PlaceSearchToolHandler(ToolHandler):
         place_search_data = PlaceSearchData(
             tool_request_guid=str(guid),
             tool_data_class="PlaceSearchData",
+            tool_name='place_search_tool',
             tool_parameters=tool_parameters,
             place_details_list=place_details_list
         )

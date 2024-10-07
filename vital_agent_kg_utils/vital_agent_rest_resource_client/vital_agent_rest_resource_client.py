@@ -28,6 +28,9 @@ from vital_agent_kg_utils.vital_agent_rest_resource_client.tools.weather.weather
 
 class VitalAgentRestResourceClient(KGraphServiceInterface, ToolServiceInterface):
 
+    def __init__(self, config:dict):
+        self.config = config
+
     # Tools
 
     def handle_tool_request(self, tool_name: str, tool_parameters: ToolParameters) -> ToolResponse:
@@ -40,7 +43,11 @@ class VitalAgentRestResourceClient(KGraphServiceInterface, ToolServiceInterface)
             tool_parameters=tool_parameters
         )
 
-        url = "http://localhost:8008/tool"
+        tool_endpoint = self.config.get("tool_endpoint")
+
+        url = f"{tool_endpoint}/tool"
+
+        # url = "http://localhost:8008/tool"
 
         # url = "http://internal-vital-agent-resource-rest-lb-1305845817.us-east-1.elb.amazonaws.com:8008/tool"
 

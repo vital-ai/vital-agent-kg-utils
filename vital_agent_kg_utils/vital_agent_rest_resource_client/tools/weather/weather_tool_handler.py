@@ -2,6 +2,7 @@ import uuid
 from vital_agent_kg_utils.vital_agent_rest_resource_client.tools.tool_handler import ToolHandler
 from vital_agent_kg_utils.vital_agent_rest_resource_client.tools.tool_parameters import ToolParameters
 from vital_agent_kg_utils.vital_agent_rest_resource_client.tools.tool_results import ToolResults
+from vital_agent_kg_utils.vital_agent_rest_resource_client.tools.weather.weather_request import WeatherRequest
 from vital_agent_kg_utils.vital_agent_rest_resource_client.tools.weather.weather_response import WeatherData, \
     WeatherPrediction, WeatherResponse
 
@@ -77,9 +78,11 @@ class WeatherToolHandler(ToolHandler):
 
         return weather_response
 
-    def parse_weather_response(self, tool_parameters: ToolParameters, response_json: dict) -> WeatherData:
+    def parse_weather_response(self, tool_parameters: WeatherRequest, response_json: dict) -> WeatherData:
 
         data = response_json
+
+        place_label = tool_parameters.get('place_label', "")
 
         daily = data['daily']
 
@@ -117,7 +120,11 @@ class WeatherToolHandler(ToolHandler):
 
                 tool_request_guid=str(guid),
                 tool_data_class="WeatherData",
+                tool_name='weather_tool',
                 tool_parameters=tool_parameters,
+
+                place_label=place_label,
+
                 latitude=data['latitude'],
                 longitude=data['longitude'],
                 timezone=data['timezone'],
@@ -143,7 +150,11 @@ class WeatherToolHandler(ToolHandler):
             weather_data = WeatherData(
                 tool_request_guid=str(guid),
                 tool_data_class="WeatherData",
+                tool_name='weather_tool',
                 tool_parameters=tool_parameters,
+
+                place_label=place_label,
+
                 latitude=data['latitude'],
                 longitude=data['longitude'],
                 timezone=data['timezone'],
