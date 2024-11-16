@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='vital-agent-kg-utils',
-    version='0.1.4',
+    version='0.1.5',
     author='Marc Hadfield',
     author_email='marc@vital.ai',
     description='Vital Agent KG Utils',
@@ -12,8 +12,8 @@ setup(
     packages=find_packages(),
     license='Apache License 2.0',
     install_requires=[
-            'vital-ai-vitalsigns>=0.1.21',
-            'vital-agent-container-sdk>=0.1.3',
+            'vital-ai-vitalsigns>=0.1.23',
+            'vital-agent-container-sdk>=0.1.5',
             'vital-ai-haley-kg>=0.1.14',
             'kgraphservice>=0.0.7',
             'six',

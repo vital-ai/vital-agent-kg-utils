@@ -1,102 +1,55 @@
-from typing import List, Optional
+from typing import List, Optional, Annotated
 from typing_extensions import TypedDict
-
 from vital_agent_kg_utils.vital_agent_rest_resource_client.tools.tool_data import ToolData
 from vital_agent_kg_utils.vital_agent_rest_resource_client.tools.tool_results import ToolResults
 
 
 class WeatherPrediction(TypedDict):
-    """
-    Represents a daily weather prediction.
+    """Represents a daily weather prediction."""
 
-    Attributes:
-        date (str): The date of the prediction in ISO8601 format.
-        weather_code (int): The weather condition code.
-        weather_code_description (str): The weather condition description.
-        temperature_max (float): The maximum temperature for the day.
-        temperature_min (float): The minimum temperature for the day.
-        apparent_temperature_max (float): The maximum apparent temperature for the day.
-        apparent_temperature_min (float): The minimum apparent temperature for the day.
-        sunrise (str): The time of sunrise in ISO8601 format.
-        sunset (str): The time of sunset in ISO8601 format.
-        precipitation_sum (float): The precipitation sum for the day.
-        precipitation_hours (float): The precipitation hours for the day.
-        precipitation_probability_max (float): The precipitation probability for the day.
-        precipitation_probability_min (float): The precipitation probability for the day.
-        precipitation_probability_mean (float): The precipitation probability for the day.
-        daylight_duration (float): The daylight duration for the day.
-        uv_index_max (float): The maximum uv index for the day.
-        wind_gusts_10m_max (float): The maximum wind gusts for the day.
-    """
-    date: str
-    weather_code: int
-
-    weather_code_description: Optional[str]
-
-    temperature_max: float
-    temperature_min: float
-    apparent_temperature_max: float
-    apparent_temperature_min: float
-    sunrise: str
-    sunset: str
-    precipitation_sum: float
-    precipitation_hours: float
-    precipitation_probability_max: float
-    precipitation_probability_min: float
-    precipitation_probability_mean: float
-    daylight_duration: float
-    uv_index_max: float
-    wind_gusts_10m_max: float
+    date: Annotated[str, ..., "The date of the prediction in ISO8601 format."]
+    weather_code: Annotated[int, ..., "The weather condition code."]
+    weather_code_description: Annotated[Optional[str], None, "The weather condition description."]
+    temperature_max: Annotated[float, ..., "The maximum temperature for the day."]
+    temperature_min: Annotated[float, ..., "The minimum temperature for the day."]
+    apparent_temperature_max: Annotated[float, ..., "The maximum apparent temperature for the day."]
+    apparent_temperature_min: Annotated[float, ..., "The minimum apparent temperature for the day."]
+    sunrise: Annotated[str, ..., "The time of sunrise in ISO8601 format."]
+    sunset: Annotated[str, ..., "The time of sunset in ISO8601 format."]
+    precipitation_sum: Annotated[float, ..., "The precipitation sum for the day."]
+    precipitation_hours: Annotated[float, ..., "The precipitation hours for the day."]
+    precipitation_probability_max: Annotated[float, ..., "The maximum precipitation probability for the day."]
+    precipitation_probability_min: Annotated[float, ..., "The minimum precipitation probability for the day."]
+    precipitation_probability_mean: Annotated[float, ..., "The mean precipitation probability for the day."]
+    daylight_duration: Annotated[float, ..., "The daylight duration for the day."]
+    uv_index_max: Annotated[float, ..., "The maximum UV index for the day."]
+    wind_gusts_10m_max: Annotated[float, ..., "The maximum wind gusts for the day."]
 
 
 class WeatherData(ToolData):
-    """
-    Represents the weather data including current conditions and daily predictions.
+    """Represents the weather data including current conditions and daily predictions."""
 
-    Attributes:
-        place_label (str): The place label of the weather prediction.
-        latitude (float): The latitude of the location.
-        longitude (float): The longitude of the location.
-        timezone (str): The timezone of the location.
+    place_label: Annotated[str, ..., "The place label of the weather prediction."]
+    latitude: Annotated[float, ..., "The latitude of the location."]
+    longitude: Annotated[float, ..., "The longitude of the location."]
+    timezone: Annotated[str, ..., "The timezone of the location."]
 
-        temperature (float): The current temperature at the location.
-        humidity (int): The current relative humidity at the location.
-        wind_speed (float): The current wind speed at the location.
+    temperature: Annotated[Optional[float], None, "The current temperature at the location."]
+    humidity: Annotated[Optional[int], None, "The current relative humidity at the location."]
+    wind_speed: Annotated[Optional[float], None, "The current wind speed at the location."]
 
-        weather_code (int): The weather condition code.
-        weather_code_description (str): The weather condition description.
-        apparent_temperature (float): The apparent temperature at the location.
-        is_day (int): When 1, is daytime
-        precipitation (float): The current precipitation at the location.
-        precipitation_probability (float): The current precipitation probability at the location.
-        cloud_cover (float): The current cloud cover at the location.
-        wind_direction_10m (float): The wind direction at the location.
-        wind_gusts_10m (float): The wind gusts at the location.
+    weather_code: Annotated[Optional[int], None, "The weather condition code."]
+    weather_code_description: Annotated[Optional[str], None, "The weather condition description."]
+    apparent_temperature: Annotated[Optional[float], None, "The apparent temperature at the location."]
+    is_day: Annotated[Optional[int], None, "Indicates if it is daytime (1 for daytime, 0 for nighttime)."]
+    precipitation: Annotated[Optional[float], None, "The current precipitation at the location."]
+    precipitation_probability: Annotated[
+        Optional[float], None, "The current precipitation probability at the location."]
+    cloud_cover: Annotated[Optional[float], None, "The current cloud cover at the location."]
+    wind_direction_10m: Annotated[Optional[float], None, "The wind direction at 10 meters above ground level."]
+    wind_gusts_10m: Annotated[Optional[float], None, "The wind gusts at 10 meters above ground level."]
 
-        daily_predictions (List[WeatherPrediction]): A list of daily weather predictions.
-    """
-    place_label: str
-    latitude: float
-    longitude: float
-    timezone: str
-
-    temperature: Optional[float]
-    humidity: Optional[int]
-    wind_speed: Optional[float]
-
-    weather_code: Optional[int]
-
-    weather_code_description: Optional[str]
-
-    apparent_temperature: Optional[float]
-    is_day: Optional[int]
-    precipitation: Optional[float]
-    precipitation_probability: Optional[float]
-    cloud_cover: Optional[float]
-    wind_direction_10m: Optional[float]
-    wind_gusts_10m: Optional[float]
-
-    daily_predictions: List[WeatherPrediction]
+    daily_predictions: Annotated[List[WeatherPrediction], ..., "A list of daily weather predictions."]
 
 
 class WeatherResponse(ToolResults):
